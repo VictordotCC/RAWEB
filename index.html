@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="es_CL">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Ruido Ambiental: Visor de Proyectos</title>
+        <link rel="icon" type="image/x-icon" href="content/img/favicon.ico">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <!-- Scripts required-->
+        <!--script defer src="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.js"></script>-->
+        <script src='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.js'></script>
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.12.0/mapbox-gl.css' rel='stylesheet' />
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.min.js" integrity="sha384-ODmDIVzN+pFdexxHEHFBQH3/9/vQ9uori45z4JjnFsRydbmQbmL5t1tQ0culUzyK" crossorigin="anonymous"></script>
+        <!--link rel="stylesheet" href="https://api.tiles.mapbox.com/mapbox-gl-js/v2.9.2/mapbox-gl.css"/>-->
+        <link rel="stylesheet" href="content/styles/style.css" type="text/css">
+        <!-- Custom Scripts-->
+        <script src="content/scripts/loadPageSection.js" defer></script>
+        <script src="content/scripts/index.js" defer></script>
+        
+
+    </head>
+    <body>
+        <div class= "informacion">
+            <div class="flex-item"><img class= "pe-1 pb-1" width = "20" height = "20" src="content/img/cell.svg"></div>
+            <div class="flex-item pe-4"><a href="tel:(+562)28910250" style="color: #413e3e; text-decoration-line: none;"><b>(+56 2) 2891 0250</b></a></div>
+            <div class="flex-item"><img class= "pe-1 pb-1" width = "20" height = "20" src="content/img/mail.svg"></div>
+            <div class="flex-item"><a href="mail:contacto@ruidoambiental.cl" style="color: #413e3e; text-decoration-line: none;"><b>contacto@ruidoambiental.cl</b></a></div>
+        </div>
+        <nav class="navbar navbar-expand-lg navbar-light bg-white fw-bold">
+            <div class="container-fluid">
+                <button class="navbar-toggler d-none d-sm-block d-lg-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <a class="custom-brand navbar-brand pt-3 pe-5" href="http://www.ruidoambiental.cl" target="_blank"><img src="content/img/logohome.jpg" width="250" height="56" alt="Ruidoambiental.cl"></a>
+                <button class="navbar-toggler d-block d-sm-none mb-1" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <li class="nav-item pe-5">
+                            <a  class="nav-link navitem text-dark current" aria-current="page" data-page="./home.html" href="#">HOME</a>
+                        </li>
+                        <li class="nav-item pe-5">
+                            <a  class="nav-link navitem text-dark notselected" aria-current="page" href="#" data-page="./pages/evaluaciones.html">EVALUACIONES SONORAS</a>
+                        </li>
+                        <li class="nav-item pe-5">
+                            <a class="nav-link navitem text-dark notselected" aria-current="page" href="#" data-page="./pages/contacto.html">CONTACTO</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <div class="container" id="cuerpo"></div>
+        <div class="container">
+            <div class="container" id="map">
+                <div id="console" class="container d-none">
+                    <h2 class="mx-auto text-center" style="color:white">Nivel de Ruido</h2>
+                    <div class= "mx-auto row legend"></div>
+                    <div class="mx-auto row">
+                        <div class="mx-auto label">30</div>
+                        <div class="mx-auto label">70+</div>
+                    </div>
+                    
+                </div>
+                <div id="filters-right" class="container d-none">
+                    <!--TODO: INFO AN FILTERS-->
+                    <h3>Datos de Viento</h3>
+                    <h3>Angulo:</h3>
+                    <h3>Velocidad</h3>
+                </div>
+            </div>
+            <div id="sliderbar" class="container d-none">
+                <h2>Fecha: <label id="active-date">01</label>-01-2022</h2>
+                <input id="slider" type="range" min="1" max = "2" step="1" value = "1">
+            </div>
+        </div>
+                                   
+    </body>
+</html>
+
+
