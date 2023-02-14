@@ -1,4 +1,5 @@
 {
     "injectBody": true,
-    "highlight": false
+    "highlight": false,
+    "navigate": false
 }

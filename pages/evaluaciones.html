@@ -7,7 +7,9 @@
     </head>
     <body>
         <div id="contenido">
-            <button type="button" class="btn btn-primary btn-sm" style="margin-top: 0.25%;">Nueva Evaluaci&oacute;n</button>
+            <!--<button type="button" class="btn btn-primary btn-sm" style="margin-top: 0.25%;" onclick="load('./pages/nuevo.html','#contenido')">Nueva Evaluaci&oacute;n</button>
+                -->
+            <button type="button" class="btn btn-primary btn-sm" style="margin-top: 0.25%;" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">Nuevo Proyecto</button>
             <table class="table table-hover">
                 <thead>
                     <tr>
@@ -28,6 +30,32 @@
                     </td>
                 </tbody>
             </table>
+            <div class="container">
+                <div class="container" id="map">
+                    <div id="console" class="container d-none">
+                        <h2 class="mx-auto text-center" style="color:white">Nivel de Ruido</h2>
+                        <div class= "mx-auto row legend"></div>
+                        <div class="mx-auto row">
+                            <div class="mx-auto label">30</div>
+                            <div class="mx-auto label">70+</div>
+                        </div>
+                        
+                    </div>
+                    <div id="filters-right" class="container d-none">
+                        <!--TODO: INFO AN FILTERS-->
+                        <h3>Datos de Viento</h3>
+                        <h3>Angulo:</h3>
+                        <h3>Velocidad</h3>
+                    </div>
+                </div>
+                <div id="sliderbar" class="container d-none">
+                    <h2>Fecha: <label id="active-date">01</label>-01-2022</h2>
+                    <input id="slider" type="range" min="1" max = "2" step="1" value = "1">
+                </div>
+            </div>
         </div>
+
+
+        
     </body>
 </html>

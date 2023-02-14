@@ -51,30 +51,38 @@
             </div>
         </nav>
         <div class="container" id="cuerpo"></div>
-        <div class="container">
-            <div class="container" id="map">
-                <div id="console" class="container d-none">
-                    <h2 class="mx-auto text-center" style="color:white">Nivel de Ruido</h2>
-                    <div class= "mx-auto row legend"></div>
-                    <div class="mx-auto row">
-                        <div class="mx-auto label">30</div>
-                        <div class="mx-auto label">70+</div>
+
+        <!-- Modal Crear Proyecto-->
+        <div class="modal fade" id="modalNuevoProyecto" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color: rgb(6,9,56);">
+                        <h1 class="modal-title fs-5" style="color: #ffffff;" id="exampleModalLabel">Nuevo Proyecto</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
-                    
-                </div>
-                <div id="filters-right" class="container d-none">
-                    <!--TODO: INFO AN FILTERS-->
-                    <h3>Datos de Viento</h3>
-                    <h3>Angulo:</h3>
-                    <h3>Velocidad</h3>
+                    <div class="modal-body">
+                        <form id="nuevoProyectoForm" enctype="multipart/form-data">
+                            <div class="form-group">
+                                <div class="mb-3">
+                                    <label for="nombreProyecto" class="form-label">Nombre del Proyecto</label>
+                                    <input type="text" class="form-control" id="nombreProyecto" name="nombreProyecto" placeholder="Nombre del Proyecto" required>
+                                    <label for="descripcionProyecto" class="form-label">Descripción del Proyecto</label>
+                                    <textarea class="form-control" id="descripcionProyecto" name="descripcionProyecto" rows="3" placeholder="Descripción del Proyecto"></textarea>
+                                    <label for="AGkml" class="form-label">Archivo KML de AeroGeneradores</label>
+                                    <input class="form-control" type="file" id="AGkml" name="AGkml" accept=".kml">
+                                    <label for="RXkml" class="form-label">Archivo KML de Receptores</label>
+                                    <input class="form-control" type="file" id="RXkml" name="RXkml" accept=".kml">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                                <button id="guardarProyecto" type="button" class="btn btn-primary">Guardar</button>
+                            </div>   
+                        </form>
+                    </div>
                 </div>
             </div>
-            <div id="sliderbar" class="container d-none">
-                <h2>Fecha: <label id="active-date">01</label>-01-2022</h2>
-                <input id="slider" type="range" min="1" max = "2" step="1" value = "1">
-            </div>
-        </div>
-                                   
+        </div>                           
     </body>
 </html>
 

@@ -1,5 +1,6 @@
+APIURL = 'http://localhost:3000/api/v1/';
 
- function load(page,section) {
+function load(page,section) {
     loadPageSection(page, section, assignToTarget);
     function assignToTarget (source) {
         container = document.getElementById('cuerpo');
@@ -8,11 +9,21 @@
     }
 };
 
+function ajax(type, url, callback) {
+    var xmlhttp = new XMLHttpRequest();
+    xmlhttp.onreadystatechange = function () {
+      if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
+        var data = xmlhttp.responseText;
+        if (callback) callback(data);
+      }
+    };
+    xmlhttp.open(type, url, true);
+    xmlhttp.send();
+};
+
 function verMapa() {
     //TODO: HIDE API KEY
     mapboxgl.accessToken = 'pk.eyJ1IjoidmljdG9yY2M4OCIsImEiOiJja3lhdnl1NzQwOWc5MnBta3A2cjZscThqIn0.M8o_N_BSN_MpTlGAhgGgvA';
-
-    //TODO: Empty Map
 
     //show console
     document.getElementById('console').classList.remove('d-none');
@@ -138,21 +149,39 @@ function verMapa() {
         });
 }
 
+document.addEventListener('DOMContentLoaded', function() {
+    navlinks = document.querySelectorAll('.nav-link');
 
-navlinks = document.querySelectorAll('.nav-link');
+    navlinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+            navlinks.forEach(function(link) {
+                link.classList.remove('current');
+                link.classList.add('notselected');
+            });
+            e.target.classList.add('current');
+            e.target.classList.remove('notselected');
+            load(e.target.getAttribute('data-page'), '#contenido');
 
-navlinks.forEach(function(link) {
-    link.addEventListener('click', function(e) {
-        navlinks.forEach(function(link) {
-            link.classList.remove('current');
-            link.classList.add('notselected');
         });
-        e.target.classList.add('current');
-        e.target.classList.remove('notselected');
-        load(e.target.getAttribute('data-page'), '#contenido');
-
     });
+
+    document.getElementById('guardarProyecto').addEventListener('click', function(e) {
+        //POST to API
+        e.preventDefault();
+        var form = document.getElementById('nuevoProyectoForm');
+        var formData = new FormData(form);
+        /*for (var pair of formData.entries()) {
+            console.log(pair[0] + ', ' + pair[1]);
+        };*/
+        var url = APIURL + 'proyecto';
+        /*ajax('POST', url, function(data) {
+            console.log(data)
+        }, formData);*/
+    });
+
 });
+
+
 
 
 
