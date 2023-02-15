@@ -1,4 +1,4 @@
-APIURL = 'http://localhost:3000/api/v1/';
+APIURL = 'http://127.0.0.1:5000/';
 
 function load(page,section) {
     loadPageSection(page, section, assignToTarget);
@@ -7,18 +7,6 @@ function load(page,section) {
         container.replaceChildren();
         document.getElementById('cuerpo').appendChild(source)
     }
-};
-
-function ajax(type, url, callback) {
-    var xmlhttp = new XMLHttpRequest();
-    xmlhttp.onreadystatechange = function () {
-      if (xmlhttp.readyState == XMLHttpRequest.DONE && xmlhttp.status == 200) {
-        var data = xmlhttp.responseText;
-        if (callback) callback(data);
-      }
-    };
-    xmlhttp.open(type, url, true);
-    xmlhttp.send();
 };
 
 function verMapa() {
@@ -165,20 +153,30 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    document.getElementById('guardarProyecto').addEventListener('click', function(e) {
+    document.getElementById('guardarProyecto').addEventListener('click', async function(e) {
         //POST to API
         e.preventDefault();
         var form = document.getElementById('nuevoProyectoForm');
         var formData = new FormData(form);
-        /*for (var pair of formData.entries()) {
-            console.log(pair[0] + ', ' + pair[1]);
-        };*/
-        var url = APIURL + 'proyecto';
-        /*ajax('POST', url, function(data) {
-            console.log(data)
-        }, formData);*/
-    });
 
+        var url = APIURL + 'proyectos';
+        console.log(url);
+        await fetch(url, {
+            method: 'POST',
+            body: formData
+        }).then(response => response.json())
+            .then(data => {
+                alert("Proyecto Creado Correctamente");
+                console.log(data);
+                const container = document.getElementById('modalNuevoProyecto');
+                const modal = bootstrap.Modal.getInstance(container);
+                modal.hide();
+            })
+            .catch(error => {
+                alert(`Ha ocurrido un Error en la Creación : ${error}`);
+            });
+    });
+                                           
 });
 
 
