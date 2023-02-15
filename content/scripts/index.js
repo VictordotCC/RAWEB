@@ -170,6 +170,7 @@ document.addEventListener('DOMContentLoaded', function() {
             .then(data => {
                 alert("Proyecto Creado Correctamente");
                 console.log(data);
+                document.cookie = `infoProyecto=${JSON.stringify(data)}`;
                 const container = document.getElementById('modalNuevoProyecto');
                 const modal = bootstrap.Modal.getInstance(container);
                 modal.hide();
