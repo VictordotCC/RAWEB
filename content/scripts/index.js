@@ -137,6 +137,8 @@ function verMapa() {
         });
 }
 
+//ONLOAD
+
 document.addEventListener('DOMContentLoaded', function() {
     navlinks = document.querySelectorAll('.nav-link');
 
