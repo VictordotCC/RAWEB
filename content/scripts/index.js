@@ -162,6 +162,9 @@ document.addEventListener('DOMContentLoaded', function() {
         var formData = new FormData(form);
 
         var url = APIURL + 'proyectos';
+        var AGurl = APIURL + 'ag';
+        var RXurl = APIURL + 'rx';
+
         console.log(url);
         await fetch(url, {
             method: 'POST',
@@ -169,15 +172,33 @@ document.addEventListener('DOMContentLoaded', function() {
         }).then(response => response.json())
             .then(data => {
                 alert("Proyecto Creado Correctamente");
-                console.log(data);
-                document.cookie = `infoProyecto=${JSON.stringify(data)}`;
+                localStorage.setItem('infoProyecto',JSON.stringify(data.proyecto));
+                localStorage.setItem('AGlist', JSON.stringify(data.AGlist));
+                localStorage.setItem('RXlist', JSON.stringify(data.RXlist));
+                
                 const container = document.getElementById('modalNuevoProyecto');
                 const modal = bootstrap.Modal.getInstance(container);
                 modal.hide();
+                
             })
             .catch(error => {
                 alert(`Ha ocurrido un Error en la Creación : ${error}`);
             });
+        let infoProyecto = JSON.parse(localStorage.getItem('infoProyecto'));
+        //POST to AG
+        let AGlist = JSON.parse(localStorage.getItem('AGlist'));
+        for (let i = 0; i < AGlist.length; i++) {
+            var AGformData = new FormData();
+            AGformData.append('nombreProyecto', infoProyecto.nombreProyecto); //TODO: cambiar por el oID del proyecto
+            AGformData.append('nombreAG', `AG${i+1}`);
+            AGformData.append('latitud', AGlist[i][0]);
+            AGformData.append('longitud', AGlist[i][1]);
+            //TODO: agregar el resto de los campos
+            //TODO: POST
+        }
+
+        
+
     });
                                            
 });
