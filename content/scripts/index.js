@@ -192,8 +192,8 @@ document.addEventListener('DOMContentLoaded', function() {
             var AGformData = new FormData();
             AGformData.append('nombreProyecto', infoProyecto.nombreProyecto); //TODO: cambiar por el oID del proyecto
             AGformData.append('nombreAG', `AG${i+1}`);
-            AGformData.append('latitud', AGlist[i][0]);
-            AGformData.append('longitud', AGlist[i][1]);
+            AGformData.append('latitud', AGlist[i][1]);
+            AGformData.append('longitud', AGlist[i][0]);
             //TODO: agregar el resto de los campos
             //TODO: POST
             await fetch(AGurl, {
