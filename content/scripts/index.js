@@ -200,17 +200,37 @@ document.addEventListener('DOMContentLoaded', function() {
                 method: 'POST',
                 body: AGformData
             }).then(response => response.json())
-                .then(data => {
-                    console.log(data);
-                }
-                )
                 .catch(error => {
                     alert(`Ha ocurrido un Error en la Creación : ${error}`);
                     success = false;
                 });
         }
-
-        
+        //Post to RX
+        let RXlist = JSON.parse(localStorage.getItem('RXlist'));
+        success = true;
+        for (let i = 0; i < RXlist.length; i++) {
+            if (!success) break;
+            var RXformData = new FormData();
+            RXformData.append('nombreProyecto', infoProyecto.nombreProyecto); //TODO: cambiar por el oID del proyecto
+            RXformData.append('nombreRX', `RX${i+1}`);
+            RXformData.append('latitud', RXlist[i][1]);
+            RXformData.append('longitud', RXlist[i][0]);
+        await fetch(RXurl, {
+            method: 'POST',
+            body: RXformData
+        }).then(response => response.json())
+            .then(data => {
+                console.log(data);
+            })
+            .catch(error => {
+                alert(`Ha ocurrido un Error en la Creación : ${error}`);
+                success = false;
+            });
+        }
+        if (success) {
+            alert("Proyecto Creado Correctamente");
+            load('./pages/evaluaciones.html', '#contenido') //TODO: verificar que se cargue la pagina de evaluaciones
+        }
 
     });
                                            
