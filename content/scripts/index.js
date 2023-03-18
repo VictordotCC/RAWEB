@@ -177,7 +177,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const container = document.getElementById('modalNuevoProyecto');
                 const modal = bootstrap.Modal.getInstance(container);
-                modal.hide();
+                modal.hide();//TODO: fix this to dissapear after last api call
                 
             })
             .catch(error => {
@@ -190,7 +190,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < AGlist.length; i++) {
             if (!success) break;
             var AGformData = new FormData();
-            AGformData.append('nombreProyecto', infoProyecto.nombreProyecto); //TODO: cambiar por el oID del proyecto
+            AGformData.append('oidProyecto', infoProyecto._id.$oid);
             AGformData.append('nombreAG', `AG${i+1}`);
             AGformData.append('latitud', AGlist[i][1]);
             AGformData.append('longitud', AGlist[i][0]);
@@ -211,7 +211,7 @@ document.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < RXlist.length; i++) {
             if (!success) break;
             var RXformData = new FormData();
-            RXformData.append('nombreProyecto', infoProyecto.nombreProyecto); //TODO: cambiar por el oID del proyecto
+            RXformData.append('oidProyecto', infoProyecto._id.$oid);
             RXformData.append('nombreRX', `RX${i+1}`);
             RXformData.append('latitud', RXlist[i][1]);
             RXformData.append('longitud', RXlist[i][0]);
@@ -219,9 +219,6 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: RXformData
         }).then(response => response.json())
-            .then(data => {
-                console.log(data);
-            })
             .catch(error => {
                 alert(`Ha ocurrido un Error en la Creación : ${error}`);
                 success = false;
@@ -229,7 +226,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         if (success) {
             alert("Proyecto Creado Correctamente");
-            load('./pages/evaluaciones.html', '#contenido') //TODO: verificar que se cargue la pagina de evaluaciones
+            await load('./pages/evaluaciones.html', '#contenido') //TODO: verificar que se cargue la pagina de evaluaciones
         }
 
     });
