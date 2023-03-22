@@ -15,11 +15,15 @@
         <link rel="stylesheet" href="content/styles/style.css" type="text/css">
         <!-- Custom Scripts-->
         <script src="content/scripts/loadPageSection.js" defer></script>
+        <script src="content/scripts/cargas.js" defer></script>
         <script src="content/scripts/index.js" defer></script>
-        
-
     </head>
     <body>
+        <div id="spinner-overlay" class="d-none">
+            <div class="spinner-border text-primary" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </div>
         <div class= "informacion">
             <div class="flex-item"><img class= "pe-1 pb-1" width = "20" height = "20" src="content/img/cell.svg"></div>
             <div class="flex-item pe-4"><a href="tel:(+562)28910250" style="color: #413e3e; text-decoration-line: none;"><b>(+56 2) 2891 0250</b></a></div>
@@ -41,7 +45,7 @@
                             <a  class="nav-link navitem text-dark current" aria-current="page" data-page="./home.html" href="#">HOME</a>
                         </li>
                         <li class="nav-item pe-5">
-                            <a  class="nav-link navitem text-dark notselected" aria-current="page" href="#" data-page="./pages/evaluaciones.html">EVALUACIONES SONORAS</a>
+                            <a class="nav-link navitem text-dark notselected" aria-current="page" href="#" data-page="./pages/evaluaciones.html" data-func="cargarProyectos">EVALUACIONES SONORAS</a>
                         </li>
                         <li class="nav-item pe-5">
                             <a class="nav-link navitem text-dark notselected" aria-current="page" href="#" data-page="./pages/contacto.html">CONTACTO</a>

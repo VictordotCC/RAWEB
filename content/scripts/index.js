@@ -1,11 +1,16 @@
 APIURL = 'http://127.0.0.1:5000/';
 
-function load(page,section) {
+function load(page,section,func) {
+    //loads a page into a section (page, section, function)
     loadPageSection(page, section, assignToTarget);
     function assignToTarget (source) {
         container = document.getElementById('cuerpo');
         container.replaceChildren();
         document.getElementById('cuerpo').appendChild(source)
+    }
+    if (func) {
+        let execute = eval(func);
+        execute();
     }
 };
 
@@ -137,6 +142,10 @@ function verMapa() {
         });
 }
 
+function toggleSpinner() {
+    document.getElementById('spinner-overlay').classList.toggle('d-none');
+}
+
 //ONLOAD
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -150,7 +159,7 @@ document.addEventListener('DOMContentLoaded', function() {
             });
             e.target.classList.add('current');
             e.target.classList.remove('notselected');
-            load(e.target.getAttribute('data-page'), '#contenido');
+            load(e.target.getAttribute('data-page'), '#contenido', e.target.getAttribute('data-func'));
 
         });
     });
@@ -165,6 +174,8 @@ document.addEventListener('DOMContentLoaded', function() {
         var AGurl = APIURL + 'ag';
         var RXurl = APIURL + 'rx';
 
+        toggleSpinner();
+
         await fetch(url, {
             method: 'POST',
             body: formData
@@ -177,7 +188,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 const container = document.getElementById('modalNuevoProyecto');
                 const modal = bootstrap.Modal.getInstance(container);
-                modal.hide();//TODO: fix this to dissapear after last api call
+                modal.hide();
                 
             })
             .catch(error => {
@@ -195,7 +206,7 @@ document.addEventListener('DOMContentLoaded', function() {
             AGformData.append('latitud', AGlist[i][1]);
             AGformData.append('longitud', AGlist[i][0]);
             //TODO: agregar el resto de los campos
-            //TODO: POST
+
             await fetch(AGurl, {
                 method: 'POST',
                 body: AGformData
@@ -225,10 +236,13 @@ document.addEventListener('DOMContentLoaded', function() {
             });
         }
         if (success) {
-            alert("Proyecto Creado Correctamente");
-            await load('./pages/evaluaciones.html', '#contenido') //TODO: verificar que se cargue la pagina de evaluaciones
+            await load('./pages/evaluaciones.html', '#contenido', cargarProyectos) //TODO: verificar que se cargue la pagina de evaluaciones
+            await toggleSpinner();
+            await alert("Proyecto Creado Correctamente");
+        } else {
+            await toggleSpinner();
+            await alert("Ha ocurrido un error al crear el proyecto");
         }
-
     });
                                            
 });

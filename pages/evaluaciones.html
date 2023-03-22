@@ -7,27 +7,18 @@
     </head>
     <body>
         <div id="contenido">
-            <!--<button type="button" class="btn btn-primary btn-sm" style="margin-top: 0.25%;" onclick="load('./pages/nuevo.html','#contenido')">Nueva Evaluaci&oacute;n</button>
-                -->
             <button type="button" class="btn btn-primary btn-sm" style="margin-top: 0.25%;" data-bs-toggle="modal" data-bs-target="#modalNuevoProyecto">Nuevo Proyecto</button>
             <table class="table table-hover">
                 <thead>
                     <tr>
-                        <th>Nombre</th>
-                        <th>Evaluaci&oacute;n</th>
+                        <th>Nombre Proyecto</th>
                         <th>Fecha Inicio</th>
-                        <th>Fecha T&eacute;rmino</th>
+                        <th>Estado</th>
+                        <th>Descripci&oacute;n Proyecto</th>
                         <th>Mapa</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <td>Los Ángeles</td>
-                    <td>Evaluación 1</td>
-                    <td>01/01/2015</td>
-                    <td>01/01/2016</td>
-                    <td>
-                        <button type="button" class="btn btn-link" onclick="verMapa();">Ver</button>
-                    </td>
+                <tbody id="proyectosTBody">
                 </tbody>
             </table>
             <div class="container">
@@ -53,9 +44,6 @@
                     <input id="slider" type="range" min="1" max = "2" step="1" value = "1">
                 </div>
             </div>
-        </div>
-
-
-        
+        </div>        
     </body>
 </html>
