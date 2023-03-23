@@ -175,6 +175,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var RXurl = APIURL + 'rx';
 
         toggleSpinner();
+        let success = true;
 
         await fetch(url, {
             method: 'POST',
@@ -193,11 +194,13 @@ document.addEventListener('DOMContentLoaded', function() {
             })
             .catch(error => {
                 alert(`Ha ocurrido un Error en la Creación : ${error}`);
+                success = false;
+                return;
             });
         let infoProyecto = JSON.parse(localStorage.getItem('infoProyecto'));
         //POST to AG
         let AGlist = JSON.parse(localStorage.getItem('AGlist'));
-        success = true;
+        
         for (let i = 0; i < AGlist.length; i++) {
             if (!success) break;
             var AGformData = new FormData();
@@ -214,6 +217,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 .catch(error => {
                     alert(`Ha ocurrido un Error en la Creación : ${error}`);
                     success = false;
+                    return;
                 });
         }
         //Post to RX
@@ -233,8 +237,23 @@ document.addEventListener('DOMContentLoaded', function() {
             .catch(error => {
                 alert(`Ha ocurrido un Error en la Creación : ${error}`);
                 success = false;
+                return;
             });
         }
+        //Post to gm
+        console.log(infoProyecto._id.$oid)
+        idFormData = new FormData();
+        idFormData.append('id_proyecto', infoProyecto._id.$oid);
+        await fetch(APIURL + 'gm', {
+            method: 'POST',
+            body: idFormData
+        }).then(response => response.json())
+            .catch(error => {
+                alert(`Ha ocurrido un Error en la Creación : ${error}`);
+                success = false;
+                return;
+            });
+
         if (success) {
             await load('./pages/evaluaciones.html', '#contenido', cargarProyectos) //TODO: verificar que se cargue la pagina de evaluaciones
             await toggleSpinner();

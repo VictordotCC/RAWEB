@@ -10,6 +10,13 @@ async function cargarProyectos() {
 
             let tbody = document.getElementById('proyectosTBody');
 
+            if (proyectos.length == 0) {
+                let tr = document.createElement('tr');
+                tr.innerHTML = `<td colspan="5" class="text-center" style="color: #6c757d;">No hay Proyectos Creados</td>`;
+                tbody.appendChild(tr);
+                return;
+            }
+            
             proyectos.forEach(proyecto => {
                 let tr = document.createElement('tr');
                 let activo = proyecto.estado ? 'Activo' : 'Inactivo';
