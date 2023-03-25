@@ -20,10 +20,11 @@ async function cargarProyectos() {
             proyectos.forEach(proyecto => {
                 let tr = document.createElement('tr');
                 let activo = proyecto.estado ? 'Activo' : 'Inactivo';
+                console.log(proyecto._id.$oid);
                 tr.innerHTML = `
                     <td>${proyecto.nombreProyecto}</td>
                     <td>${proyecto.fechaCreacion}</td>
-                    <td>${activo}</td>
+                    <td>${activo} <button type="button" class="btn-primary btn-sm" onclick="cargarGM()">${(proyecto._id.$oid)}</button></td>
                     <td>${proyecto.descripcionProyecto}</td>
                     <td><button type="button" class="btn btn-link" onclick="verMapa();">Ver</button></td>`;
                 tbody.appendChild(tr);
@@ -31,5 +32,20 @@ async function cargarProyectos() {
         })
         .catch(error => {
             alert(`Ha ocurrido un Error en la Carga : ${error}`);
+        });
+}
+
+async function cargarGM(id_proyecto) {
+    console.log('Generando Mapa');
+    idFormData = new FormData();
+    idFormData.append('id_proyecto', id_proyecto);
+    await fetch(APIURL + 'gm', {
+        method: 'POST',
+        body: idFormData
+    }).then(response => response.json())
+        .catch(error => {
+            alert(`Ha ocurrido un Error en la Creación : ${error}`);
+            success = false;
+            return;
         });
 }
