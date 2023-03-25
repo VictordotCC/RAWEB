@@ -24,7 +24,7 @@ async function cargarProyectos() {
                 tr.innerHTML = `
                     <td>${proyecto.nombreProyecto}</td>
                     <td>${proyecto.fechaCreacion}</td>
-                    <td>${activo} <button type="button" class="btn-primary btn-sm" onclick="cargarGM()">${(proyecto._id.$oid)}</button></td>
+                    <td>${activo} <button type="button" class="btn-primary btn-sm" onclick="cargarGM('${proyecto._id.$oid}')">Calcular</button></td>
                     <td>${proyecto.descripcionProyecto}</td>
                     <td><button type="button" class="btn btn-link" onclick="verMapa();">Ver</button></td>`;
                 tbody.appendChild(tr);
