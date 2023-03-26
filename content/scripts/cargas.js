@@ -37,6 +37,7 @@ async function cargarProyectos() {
 
 async function cargarGM(id_proyecto) {
     console.log('Generando Mapa');
+    toggleSpinner();
     idFormData = new FormData();
     idFormData.append('id_proyecto', id_proyecto);
     await fetch(APIURL + 'gm', {
@@ -46,6 +47,8 @@ async function cargarGM(id_proyecto) {
         .catch(error => {
             alert(`Ha ocurrido un Error en la Creación : ${error}`);
             success = false;
+            toggleSpinner();
             return;
         });
+    toggleSpinner();
 }

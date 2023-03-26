@@ -227,7 +227,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (!success) break;
             var RXformData = new FormData();
             RXformData.append('oidProyecto', infoProyecto._id.$oid);
-            RXformData.append('nombreRX', `RX${i+1}`);
+            RXformData.append('nombreRX', `R${i+1}`);
             RXformData.append('latitud', RXlist[i][1]);
             RXformData.append('longitud', RXlist[i][0]);
         await fetch(RXurl, {
