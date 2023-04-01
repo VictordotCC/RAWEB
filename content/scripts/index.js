@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 return;
             });
         let infoProyecto = JSON.parse(localStorage.getItem('infoProyecto'));
-        //POST to AG
+        //POST to AG FIXME: se duplican los AG y RX
         let AGlist = JSON.parse(localStorage.getItem('AGlist'));
         
         for (let i = 0; i < AGlist.length; i++) {
